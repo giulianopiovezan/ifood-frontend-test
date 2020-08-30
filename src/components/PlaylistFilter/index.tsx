@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 import Select from 'components/UI/Select';
 
+import { locales } from 'utils/constants';
 import { Container } from './styles';
 
 import { FilterResponse, Params, ParamsType } from './types';
@@ -29,6 +30,31 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
     }
   }, []);
 
+  const transformedFilters = filters.map(filter => {
+    if (filter.id !== 'locale') {
+      return filter;
+    }
+
+    const valuesMapped = filter.values!.map(v => {
+      const mappedLocale = locales.find(l => l.code === v.value);
+
+      if (!mappedLocale) {
+        return v;
+      }
+
+      return {
+        name: mappedLocale.label,
+        value: v.value,
+      };
+    });
+
+    return {
+      ...filter,
+      name: 'Idioma',
+      values: valuesMapped,
+    };
+  });
+
   return (
     <Container id="playlistFilter">
       <Grid container spacing={1}>
@@ -39,7 +65,7 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
         </Grid>
         <Grid item xs={12} md={9}>
           <Grid container spacing={2}>
-            {filters.map(
+            {transformedFilters.map(
               filter =>
                 filter?.values && (
                   <Grid key={filter.id} item xs={12} md={6}>
@@ -48,8 +74,7 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
                       label={filter.name}
                       options={filter.values}
                       onChange={({ target }) =>
-                        handleFilterChange(filter.id, target.value as string)
-                      }
+                        handleFilterChange(filter.id, target.value as string)}
                     />
                   </Grid>
                 ),

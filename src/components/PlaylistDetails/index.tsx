@@ -59,6 +59,7 @@ const PlaylistDetails: React.FC<PlayListDetailsProps> = ({ playlist }) => {
       </Details>
       {trackData.items && (
         <Tracks>
+          <h3>Ouça as prévias da playlist:</h3>
           {trackData.items.map(item => (
             <Track key={item.track.id} track={item.track} />
           ))}

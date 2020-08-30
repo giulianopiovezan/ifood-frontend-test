@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 
 import axios from 'axios';
@@ -117,8 +118,7 @@ const PlayList: React.FC = () => {
           component="div"
           labelRowsPerPage="Itens por página"
           labelDisplayedRows={({ from, to, count }) =>
-            `${from}-${to} de ${count !== -1 ? count : `mais que ${to}`}`
-          }
+            `${from}-${to} de ${count !== -1 ? count : `mais que ${to}`}`}
           count={playlistData.playlists.total}
           page={page}
           rowsPerPage={limit}

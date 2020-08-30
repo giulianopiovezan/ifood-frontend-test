@@ -156,4 +156,8 @@ export const Tracks = styled.section`
   margin-top: 10px;
   padding: 10px;
   border-radius: 8px;
+
+  h3 {
+    margin-bottom: 10px;
+  }
 `;
