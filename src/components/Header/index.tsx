@@ -25,7 +25,7 @@ const Header: React.FC = () => {
               </Grid>
               <Grid item xs={12} md={8}>
                 <h2>
-                  <strong>Milhões de músicas </strong> e podcasts para explorar.
+                  <strong>Diversas playlists </strong> à serem exploradas
                 </h2>
               </Grid>
               <Grid item xs={12}>

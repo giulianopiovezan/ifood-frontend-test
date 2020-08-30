@@ -5,6 +5,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import Select from 'components/UI/Select';
+import DatePicker from 'components/UI/DatePicker';
+
+import { ParsableDate } from '@material-ui/pickers/constants/prop-types';
 
 import { locales } from 'utils/constants';
 import { Container } from './styles';
@@ -23,6 +26,7 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
   filters,
 }) => {
   const [filterSelected, setFilterSelected] = useState({} as Params);
+  const [timeStamp, setTimestamp] = useState<Date | null>(null);
 
   const handleFilterChange = useCallback((name: string, value: ParamsType) => {
     if (value !== '') {
@@ -30,12 +34,20 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
     }
   }, []);
 
+  const handleTimestampChange = useCallback(
+    (date: ParsableDate) => {
+      setTimestamp(date as Date);
+      handleFilterChange('timestamp', date as Date);
+    },
+    [handleFilterChange],
+  );
+
   const transformedFilters = filters.map(filter => {
-    if (filter.id !== 'locale') {
+    if (filter.id !== 'locale' || !filter.values) {
       return filter;
     }
 
-    const valuesMapped = filter.values!.map(v => {
+    const valuesMapped = filter.values.map(v => {
       const mappedLocale = locales.find(l => l.code === v.value);
 
       if (!mappedLocale) {
@@ -68,7 +80,7 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
             {transformedFilters.map(
               filter =>
                 filter?.values && (
-                  <Grid key={filter.id} item xs={12} md={6}>
+                  <Grid key={filter.id} item xs={12} md={4}>
                     <Select
                       key={filter.id}
                       label={filter.name}
@@ -79,6 +91,15 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
                   </Grid>
                 ),
             )}
+            <Grid item xs={12} md={4}>
+              <DatePicker
+                label="Data e Horário"
+                value={timeStamp}
+                onChange={handleTimestampChange}
+                format="dd/MM/yyyy HH:mm:ss"
+                disableFuture
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 label="Playlist"
@@ -87,6 +108,7 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
                 onChange={({ target }) => onLocalSearch(target.value as string)}
               />
             </Grid>
+
             <Grid item xs={12}>
               <Button
                 className="btn-search"

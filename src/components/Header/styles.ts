@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mainColor } from 'styles/colors';
 
 export const HeaderContainer = styled.header`
   background: #f5f3f4;
@@ -12,13 +13,13 @@ export const HeaderContainer = styled.header`
     font-weight: 700;
 
     strong {
-      color: #ea1d2c;
+      color: ${mainColor};
     }
   }
 
   a {
     display: inline-block;
-    background: #ea1d2c;
+    background: ${mainColor};
     border-radius: 50px;
     padding: 20px 40px;
     text-decoration: none;

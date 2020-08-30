@@ -1,16 +1,18 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useState, useCallback } from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
-import CloseIcon from '@material-ui/icons/Close';
 
-import useStyles from './styles';
+import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CloseIcon from '@material-ui/icons/Close';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+import { mainColor } from 'styles/colors';
+
+import { FaPlayCircle, FaPauseCircle } from 'react-icons/fa';
+
+import { Container } from './styles';
 
 interface PlayerProps {
   onClose: () => void;
@@ -34,8 +36,9 @@ const Player: React.FC<PlayerProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [progress, setProgress] = useState(0);
-  const classes = useStyles();
   const playerRef = React.useRef<HTMLAudioElement>(null);
+  const theme = useTheme();
+  const isSmallerScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const artistsJoined = artists.flatMap(artist => artist.name).join(', ');
 
@@ -67,67 +70,86 @@ const Player: React.FC<PlayerProps> = ({
     if (!playerRef.current) {
       return;
     }
-
     setIsPlaying(state => !state);
-
     if (isPlaying) {
       playerRef.current.pause();
       return;
     }
-
     playerRef.current.play();
   }, [isPlaying]);
 
   return (
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <IconButton className={classes.closePlayer} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
+    <Container container>
+      {!isSmallerScreen ? (
+        <Grid item xs={6} className="music">
+          <div>
+            <img alt={album.name} width={64} src={album.image} />
+          </div>
+          <div className="playPause">
+            <IconButton onClick={handlePlayerActions}>
+              {isPlaying ? (
+                <FaPauseCircle size={30} color={mainColor} />
+              ) : (
+                <FaPlayCircle size={30} color={mainColor} />
+              )}
+            </IconButton>
+            <div className="timer">
+              <span>
+                {String(
+                  Math.floor(playerRef?.current?.duration || 0) - time,
+                ).padStart(2, '0')}
+              </span>
 
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {trackName}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {artistsJoined}
-          </Typography>
-        </CardContent>
+              <CircularProgress size={29} variant="static" value={progress} />
+            </div>
+          </div>
+          <div>
+            <p>Música</p>
+            <strong>{trackName}</strong>
+            <span>{artistsJoined}</span>
+          </div>
+          <div>
+            <p>Álbum</p>
+            {album.name}
+          </div>
+          <div>
+            <IconButton onClick={onClose}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+        </Grid>
+      ) : (
+        <Grid item xs={12} className="music">
+          <div className="playPause">
+            <IconButton onClick={handlePlayerActions}>
+              {isPlaying ? (
+                <FaPauseCircle size={30} color={mainColor} />
+              ) : (
+                <FaPlayCircle size={30} color={mainColor} />
+              )}
+            </IconButton>
+          </div>
+          <div>
+            <strong>{trackName}</strong>
+            <span>{artistsJoined}</span>
+          </div>
 
-        <div className={classes.controls}>
-          <Typography
-            variant="subtitle1"
-            color="textSecondary"
-            display="block"
-            className={classes.cron}
-          >
-            <span className={classes.timer}>
-              {String(
-                Math.floor(playerRef?.current?.duration || 0) - time,
-              ).padStart(2, '0')}
-            </span>
+          <div>
+            <IconButton onClick={onClose}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+        </Grid>
+      )}
 
-            <CircularProgress variant="static" value={progress} />
-          </Typography>
-          <IconButton aria-label="play/pause" onClick={handlePlayerActions}>
-            {!isPlaying ? (
-              <PlayArrowIcon className={classes.playPauseIcon} />
-            ) : (
-              <PauseIcon className={classes.playPauseIcon} />
-            )}
-          </IconButton>
-        </div>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={album.image}
-        title={album.name}
-      />
-
+      {/* <Grid item xs={4} md={2} lg={3}>
+        <p>Duração</p>
+        <span>{transformToMinutesAndSeconds(track.duration_ms)}</span>
+      </Grid> */}
       <audio ref={playerRef} style={{ display: 'none' }} controls>
         <source src={trackSource} type="audio/mp3" />
       </audio>
-    </Card>
+    </Container>
   );
 };
 

@@ -1,49 +1,67 @@
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+import Grid from '@material-ui/core/Grid';
+import { mainColor } from 'styles/colors';
 
-export default makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      position: 'fixed',
-      flexDirection: 'row-reverse',
-      display: 'flex',
-      bottom: 0,
-    },
-    details: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    content: {
-      flex: 1,
-      marginTop: 5,
-    },
-    cover: {
-      width: 151,
-    },
-    controls: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-    },
-    playPauseIcon: {
-      height: 38,
-      width: 38,
-    },
-    cron: {
-      position: 'relative',
-      marginTop: 10,
-    },
+export const Container = styled(Grid)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  background: #f5f3f4;
+  z-index: 3000;
 
-    timer: {
-      position: 'absolute',
-      right: '26%',
-      top: '12%',
-    },
-    closePlayer: {
-      position: 'absolute',
-      right: 0,
-      padding: 0,
-    },
-  }),
-);
+  img {
+    border-radius: 5px;
+  }
+
+  p {
+    font-weight: 700;
+  }
+
+  .music {
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      margin-left: 5px;
+      align-self: center;
+
+      strong {
+        font-size: 16px;
+        color: ${mainColor};
+      }
+
+      span {
+        display: block;
+        font-size: 12px;
+      }
+    }
+
+    .playPause {
+      display: flex;
+      align-items: center;
+
+      button {
+        padding: 0;
+        height: 30px;
+      }
+
+      .timer {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 15px;
+
+        span {
+          position: absolute;
+        }
+      }
+    }
+  }
+`;

@@ -11,6 +11,7 @@ import api from 'services/api';
 import PlaylistDetails from 'components/PlaylistDetails';
 import PlaylistFilter from 'components/PlaylistFilter';
 
+import { useToast } from 'hooks/toast';
 import { Container } from './styles';
 
 import { FilterResponse, Params, PlayListResponse } from './types';
@@ -26,6 +27,7 @@ const PlayList: React.FC = () => {
   const [playlistFilter, setPlaylistFilter] = useState('');
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
+  const { show } = useToast();
 
   const playlistFiltered = useMemo(
     () =>
@@ -59,22 +61,41 @@ const PlayList: React.FC = () => {
   }, [filterData.filters]);
 
   const loadPlaylist = useCallback(async () => {
-    const response = await api.get('browse/featured-playlists', {
-      params: {
-        ...filters,
-        limit,
-        offset: page * limit,
-      },
-    });
+    try {
+      const response = await api.get('browse/featured-playlists', {
+        params: {
+          ...filters,
+          limit,
+          offset: page * limit,
+        },
+      });
 
-    setPlaylistData(response.data);
-  }, [page, limit, filters]);
+      setPlaylistData(response.data);
+    } catch {
+      show({
+        severity: 'error',
+        description: 'Ocorreu um erro ao carregar as Playlists :(',
+      });
+    }
+  }, [filters, limit, page, show]);
 
   useEffect(() => {
-    axios
-      .get('http://www.mocky.io/v2/5a25fade2e0000213aa90776')
-      .then(res => setFilterData(res.data));
-  }, []);
+    async function loadFilters(): Promise<void> {
+      try {
+        const response = await axios.get(
+          'http://www.mocky.io/v2/5a25fade2e0000213aa90776',
+        );
+        setFilterData(response.data);
+      } catch {
+        show({
+          severity: 'error',
+          description: 'Ocorreu um erro ao carregar os filtros :(',
+        });
+      }
+    }
+
+    loadFilters();
+  }, [show]);
 
   useEffect(() => {
     const interval = setInterval(() => {

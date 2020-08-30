@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mainColor } from 'styles/colors';
 
 export const Container = styled.section`
   display: flex;
@@ -24,7 +25,7 @@ export const Details = styled.div`
     }
   }
 
-  article {
+  .description {
     margin-left: 20px;
     display: flex;
     flex-direction: column;
@@ -34,8 +35,8 @@ export const Details = styled.div`
       display: block;
       margin-top: 5px;
       font-size: 14px;
-      color: #ea1d2c;
-      border: 1px solid #ea1d2c;
+      color: ${mainColor};
+      border: 1px solid ${mainColor};
       width: 100px;
       height: 38px;
       padding: 10px 20px;
@@ -50,7 +51,7 @@ export const Details = styled.div`
       font-size: 30px;
       line-height: 36px;
 
-      color: #ea1d2c;
+      color: ${mainColor};
       margin-top: 10px;
     }
 
@@ -102,7 +103,11 @@ export const Details = styled.div`
       }
 
       a.ifood {
-        background: #ea1d2c;
+        background: ${mainColor};
+      }
+
+      a.ifood-disabled {
+        background: #dadada;
       }
     }
   }
@@ -119,7 +124,7 @@ export const Details = styled.div`
       height: auto;
     }
 
-    article {
+    .description {
       margin-top: 8px;
       margin-left: 0;
 

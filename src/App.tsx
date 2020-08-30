@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import Header from 'components/Header';
-import { PlayerProvider } from 'hooks/player';
+import AppProvider from 'hooks';
 import theme from 'styles/theme';
 
 import PlayList from 'pages/PlayList';
@@ -14,12 +14,12 @@ import 'styles/index.css';
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <PlayerProvider>
+      <AppProvider>
         <Header />
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" style={{ marginBottom: 90 }}>
           <PlayList />
         </Container>
-      </PlayerProvider>
+      </AppProvider>
     </ThemeProvider>
   );
 };

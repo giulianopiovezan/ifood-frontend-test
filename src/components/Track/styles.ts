@@ -1,46 +1,53 @@
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
+import { mainColor } from 'styles/colors';
 
 export const Container = styled(Grid)`
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   padding: 10px;
-  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.2);
-  &:first-of-type {
-    margin-bottom: 8px;
-  }
+  border: 1px solid #e4e4e4;
+  margin: 5px 0;
+  border-radius: 5px;
 
-  img {
-    border-radius: 5px;
-  }
-
-  p {
-    font-weight: 700;
-  }
-
-  .music {
+  .details {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
 
-    article {
+    img {
+      border-radius: 5px;
+      margin: 0 10px 0 0;
+    }
+
+    p {
+      font-weight: 700;
+    }
+
+    .album {
+      width: 35%;
+    }
+
+    .music {
+      width: 25%;
+      display: flex;
+      flex-direction: column;
       margin-left: 5px;
       align-self: center;
 
       strong {
         font-size: 16px;
-        color: #ea1d2c;
+        color: ${mainColor};
       }
 
       span {
         display: block;
         font-size: 12px;
       }
-    }
-  }
 
-  & + div {
-    margin-top: 5px;
+      @media only screen and (max-width: 768px) {
+        width: 60%;
+      }
+    }
   }
 `;

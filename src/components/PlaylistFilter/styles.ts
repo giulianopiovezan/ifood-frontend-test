@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import MdContainer from '@material-ui/core/Container';
+import { mainColor } from 'styles/colors';
 
 export const Container = styled(MdContainer)`
   background: #ffffff;
@@ -13,7 +14,7 @@ export const Container = styled(MdContainer)`
     text-align: left;
     padding: 20px 0 40px 0;
     font-weight: 700;
-    color: #ea1d2c;
+    color: ${mainColor};
 
     strong {
       color: #000;
