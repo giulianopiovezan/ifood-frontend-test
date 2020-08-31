@@ -17,6 +17,8 @@ interface PlayerData {
 interface PlayerContextData {
   play: (track: PlayerData) => void;
   close: () => void;
+  currentTrack: PlayerData;
+  isPlayerOpen: boolean;
 }
 
 const PlayerContext = createContext<PlayerContextData>({} as PlayerContextData);
@@ -35,7 +37,9 @@ export const PlayerProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <PlayerContext.Provider value={{ play, close }}>
+    <PlayerContext.Provider
+      value={{ play, close, currentTrack: data, isPlayerOpen: open }}
+    >
       {children}
       {open && data.trackSource && <Player value={data} onClose={close} />}
     </PlayerContext.Provider>

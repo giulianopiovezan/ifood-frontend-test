@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -22,8 +22,13 @@ interface ToastProps {
 const Toast: React.FC<ToastProps> = ({
   message: { description, severity = 'info' },
 }) => {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const { close } = useToast();
+
+  useEffect(() => {
+    setOpen(!!description);
+  }, [description]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -37,7 +42,7 @@ const Toast: React.FC<ToastProps> = ({
     <div className={classes.root}>
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={!!description}
+        open={open}
         onClose={close}
       >
         <Alert

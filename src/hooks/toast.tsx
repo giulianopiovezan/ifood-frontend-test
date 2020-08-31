@@ -12,6 +12,7 @@ interface ToastData {
 interface ToastContextData {
   show: (message: ToastData) => void;
   close: () => void;
+  currentMessage: ToastData;
 }
 
 const ToastContext = createContext<ToastContextData>({} as ToastContextData);
@@ -28,7 +29,7 @@ export const ToastProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <ToastContext.Provider value={{ show, close }}>
+    <ToastContext.Provider value={{ show, close, currentMessage: toastData }}>
       {children}
       {toastData.description && <Toast message={toastData} />}
     </ToastContext.Provider>
