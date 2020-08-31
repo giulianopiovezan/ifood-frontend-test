@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useState, useCallback } from 'react';
 
@@ -33,7 +34,7 @@ const Player: React.FC<PlayerProps> = ({
   value: { trackName, album, artists, trackSource },
   onClose,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [, setIsPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [progress, setProgress] = useState(0);
   const playerRef = React.useRef<HTMLAudioElement>(null);
@@ -41,6 +42,13 @@ const Player: React.FC<PlayerProps> = ({
   const isSmallerScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const artistsJoined = artists.flatMap(artist => artist.name).join(', ');
+
+  const currentTime = React.useMemo(
+    () => Math.floor(playerRef?.current?.duration || 0) - time,
+    [time],
+  );
+
+  const durationTime = Math.floor(playerRef.current?.duration || 0);
 
   useEffect(() => {
     if (!playerRef.current) {
@@ -58,25 +66,30 @@ const Player: React.FC<PlayerProps> = ({
     }
 
     playerRef.current.ontimeupdate = () => {
-      const duration = Math.floor(playerRef.current?.duration || 0);
-      const currentTime = Math.floor(playerRef.current?.currentTime || 0);
-      const currentProgress = Math.floor(100 - (currentTime / duration) * 100);
-      setTime(currentTime);
+      const _durationTime = Math.floor(playerRef.current?.duration || 0);
+      const _currentTime = Math.floor(playerRef.current?.currentTime || 0);
+      const currentProgress = Math.floor(
+        100 - (_currentTime / _durationTime) * 100,
+      );
+      setTime(_currentTime);
       setProgress(currentProgress <= 0 ? 100 : currentProgress);
     };
-  }, [isPlaying]);
+  }, [durationTime]);
 
   const handlePlayerActions = useCallback(() => {
     if (!playerRef.current) {
       return;
     }
-    setIsPlaying(state => !state);
-    if (isPlaying) {
+
+    setIsPlaying(playerRef.current.paused);
+
+    if (!playerRef.current.paused) {
       playerRef.current.pause();
       return;
     }
+
     playerRef.current.play();
-  }, [isPlaying]);
+  }, []);
 
   return (
     <Container container>
@@ -90,7 +103,7 @@ const Player: React.FC<PlayerProps> = ({
               data-testid="play-pause-btn"
               onClick={handlePlayerActions}
             >
-              {isPlaying ? (
+              {!playerRef.current?.paused ? (
                 <FaPauseCircle
                   data-testid="icon-pause"
                   size={30}
@@ -106,11 +119,8 @@ const Player: React.FC<PlayerProps> = ({
             </IconButton>
             <div className="timer">
               <span>
-                {String(
-                  Math.floor(playerRef?.current?.duration || 0) - time,
-                ).padStart(2, '0')}
+                {String(currentTime || durationTime).padStart(2, '0')}
               </span>
-
               <CircularProgress size={29} variant="static" value={progress} />
             </div>
           </div>
@@ -136,7 +146,7 @@ const Player: React.FC<PlayerProps> = ({
               data-testid="play-pause-btn"
               onClick={handlePlayerActions}
             >
-              {isPlaying ? (
+              {!playerRef.current?.paused ? (
                 <FaPauseCircle
                   data-testid="icon-pause"
                   size={30}
