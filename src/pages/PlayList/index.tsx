@@ -139,7 +139,8 @@ const PlayList: React.FC = () => {
           component="div"
           labelRowsPerPage="Itens por página"
           labelDisplayedRows={({ from, to, count }) =>
-            `${from}-${to} de ${count !== -1 ? count : `mais que ${to}`}`}
+            `${from}-${to} de ${count !== -1 ? count : `mais que ${to}`}`
+          }
           count={playlistData.playlists.total}
           page={page}
           rowsPerPage={limit}

@@ -29,7 +29,7 @@ const PlaylistDetails: React.FC<PlayListDetailsProps> = ({ playlist }) => {
           const response = await api.get(`playlists/${playlistId}/tracks`);
           setTrackData(response.data);
           setExpanded(true);
-        } catch {
+        } catch (e) {
           show({
             severity: 'error',
             description: 'Ocorreu um erro ao carregar as músicas :(',
@@ -46,10 +46,6 @@ const PlaylistDetails: React.FC<PlayListDetailsProps> = ({ playlist }) => {
     [show, expanded],
   );
 
-  if (!playlist) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <Container key={playlist.id}>
       <Details>
@@ -57,7 +53,7 @@ const PlaylistDetails: React.FC<PlayListDetailsProps> = ({ playlist }) => {
         <div className="description">
           <strong>Playlist</strong>
           <h1>{playlist.name}</h1>
-          <span>{playlist.description}</span>
+          <span data-testid="playlist-description">{playlist.description}</span>
           <div className="actions">
             <a
               href=""

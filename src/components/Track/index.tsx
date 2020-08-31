@@ -73,7 +73,7 @@ const Track: React.FC<TrackProps> = ({ track }) => {
           artists: track.album.artists,
           trackSource: response.data.preview_url,
         });
-      } catch {
+      } catch (e) {
         show({
           severity: 'error',
           description: 'Ocorreu um erro ao executar a prévia :(',

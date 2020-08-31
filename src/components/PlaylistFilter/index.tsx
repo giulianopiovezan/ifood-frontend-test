@@ -82,6 +82,9 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
                 filter?.values && (
                   <Grid key={filter.id} item xs={12} md={4}>
                     <Select
+                      inputProps={{
+                        'data-testid': filter.id,
+                      }}
                       key={filter.id}
                       label={filter.name}
                       options={filter.values}
@@ -102,6 +105,9 @@ const PlaylistFilter: React.FC<PlaylistFilterProps> = ({
             </Grid>
             <Grid item xs={12}>
               <TextField
+                inputProps={{
+                  'data-testid': 'playlist-name-filter',
+                }}
                 label="Playlist"
                 fullWidth
                 variant="outlined"

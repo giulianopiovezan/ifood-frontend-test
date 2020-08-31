@@ -3,7 +3,7 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import Header from 'components/Header';
+import Header from 'components/UI/Header';
 import AppProvider from 'hooks';
 import theme from 'styles/theme';
 

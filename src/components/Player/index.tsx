@@ -86,11 +86,22 @@ const Player: React.FC<PlayerProps> = ({
             <img alt={album.name} width={64} src={album.image} />
           </div>
           <div className="playPause">
-            <IconButton onClick={handlePlayerActions}>
+            <IconButton
+              data-testid="play-pause-btn"
+              onClick={handlePlayerActions}
+            >
               {isPlaying ? (
-                <FaPauseCircle size={30} color={mainColor} />
+                <FaPauseCircle
+                  data-testid="icon-pause"
+                  size={30}
+                  color={mainColor}
+                />
               ) : (
-                <FaPlayCircle size={30} color={mainColor} />
+                <FaPlayCircle
+                  data-testid="icon-play"
+                  size={30}
+                  color={mainColor}
+                />
               )}
             </IconButton>
             <div className="timer">
@@ -113,7 +124,7 @@ const Player: React.FC<PlayerProps> = ({
             {album.name}
           </div>
           <div>
-            <IconButton onClick={onClose}>
+            <IconButton data-testid="close-music-player" onClick={onClose}>
               <CloseIcon />
             </IconButton>
           </div>
@@ -121,11 +132,22 @@ const Player: React.FC<PlayerProps> = ({
       ) : (
         <Grid item xs={12} className="music">
           <div className="playPause">
-            <IconButton onClick={handlePlayerActions}>
+            <IconButton
+              data-testid="play-pause-btn"
+              onClick={handlePlayerActions}
+            >
               {isPlaying ? (
-                <FaPauseCircle size={30} color={mainColor} />
+                <FaPauseCircle
+                  data-testid="icon-pause"
+                  size={30}
+                  color={mainColor}
+                />
               ) : (
-                <FaPlayCircle size={30} color={mainColor} />
+                <FaPlayCircle
+                  data-testid="icon-play"
+                  size={30}
+                  color={mainColor}
+                />
               )}
             </IconButton>
           </div>
@@ -135,17 +157,12 @@ const Player: React.FC<PlayerProps> = ({
           </div>
 
           <div>
-            <IconButton onClick={onClose}>
+            <IconButton data-testid="close-music-player" onClick={onClose}>
               <CloseIcon />
             </IconButton>
           </div>
         </Grid>
       )}
-
-      {/* <Grid item xs={4} md={2} lg={3}>
-        <p>Duração</p>
-        <span>{transformToMinutesAndSeconds(track.duration_ms)}</span>
-      </Grid> */}
       <audio ref={playerRef} style={{ display: 'none' }} controls>
         <source src={trackSource} type="audio/mp3" />
       </audio>
