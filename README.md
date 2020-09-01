@@ -13,7 +13,7 @@
 
 ## 🚀 Features
 
-The application consist of a sigle page, that have a list of playlists, having options to filter and paginate too.
+The application consist of a single page, that have a list of playlists, having options to filter and paginate too.
 
 In the list you can see playlist's cover, name, and a short description. You also have option to open in spotify, or see playlist's music, where there are some details, like album cover, artists, music's name and duration. You can play a preview of a music too in the app.
 
@@ -29,7 +29,7 @@ here you see filters and playlists
   <img alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/filter-and-list.png?raw=true">
 </p>
 
-and here is pagination and
+and here is pagination
 
 <p align="center">
   <img alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/pagination.png?raw=true">

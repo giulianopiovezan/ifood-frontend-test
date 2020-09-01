@@ -2,14 +2,6 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import { useToast, ToastProvider } from 'hooks/toast';
 
-jest.mock('@material-ui/core', () => {
-  const materialUI = jest.requireActual('@material-ui/core');
-  return {
-    ...materialUI,
-    Grow: jest.fn(({ children }) => children),
-  };
-});
-
 describe('Toast hook', () => {
   it('Should be able to show Toast', () => {
     const { result } = renderHook(() => useToast(), {

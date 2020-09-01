@@ -1,17 +1,3 @@
-export interface PlayListDetailsProps {
-  playlist: {
-    id: string;
-    description: string;
-    external_urls: {
-      spotify: string;
-    };
-    name: string;
-    images: {
-      url: string;
-    }[];
-  };
-}
-
 export interface TrackResponse {
   items: {
     track: {

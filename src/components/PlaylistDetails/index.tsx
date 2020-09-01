@@ -10,7 +10,21 @@ import Track from 'components/Track';
 import { useToast } from 'hooks/toast';
 import { Container, Details, Tracks } from './styles';
 
-import { PlayListDetailsProps, TrackResponse } from './types';
+import { TrackResponse } from './types';
+
+interface PlayListDetailsProps {
+  playlist: {
+    id: string;
+    description: string;
+    external_urls: {
+      spotify: string;
+    };
+    name: string;
+    images: {
+      url: string;
+    }[];
+  };
+}
 
 const PlaylistDetails: React.FC<PlayListDetailsProps> = ({ playlist }) => {
   const [trackData, setTrackData] = useState<TrackResponse>(
