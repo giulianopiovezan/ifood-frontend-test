@@ -19,7 +19,36 @@ In the list you can see playlist's cover, name, and a short description. You als
 
 below you see the header and filters
 
-## 🚀 Tecnologies
+<p align="center">
+  <img width="500" alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/main-page.png?raw=true">
+</p>
+
+here you see filters and playlists
+
+<p align="center">
+  <img width="500" alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/filter-and-list.png?raw=true">
+</p>
+
+and here is pagination and
+
+<p align="center">
+  <img width="500" alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/pagination.png?raw=true">
+</p>
+
+and finally an extra to project, musics and option to listen a preview :)
+
+<p align="center">
+  <img width="500" alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/player.png?raw=true">
+</p>
+
+;)
+
+<p align="center">
+  <img width="500" alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/feature.gif?raw=true">
+</p>
+
+
+## Tecnologies
 
 In this project was used follow tecnologies:
 
