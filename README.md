@@ -47,6 +47,16 @@ and finally an extra to project, musics and option to listen a preview :)
   <img alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/feature.gif?raw=true">
 </p>
 
+The app in mobile view
+
+<p align="center">
+  <img alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/responsive-main.png?raw=true">
+</p>
+
+<p align="center">
+  <img alt="License" src="https://github.com/giulianopiovezan/ifood-frontend-test/blob/master/docs/responsive-playlist.png?raw=true">
+</p>
+
 
 ## Tecnologies
 
