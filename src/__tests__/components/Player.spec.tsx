@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import Player from 'components/Player';
 
@@ -32,27 +32,5 @@ describe('Player Component', () => {
     expect(getByText('fake track')).toBeInTheDocument();
     expect(getByText('fake album')).toBeInTheDocument();
     expect(getByText('fake artist')).toBeInTheDocument();
-  });
-
-  it('Should be able to pause / play music', async () => {
-    const { getByTestId } = render(
-      <Player value={playerMock} onClose={() => {}} />,
-    );
-
-    const btnPlayPauseEl = getByTestId('play-pause-btn');
-
-    expect(getByTestId('icon-pause')).toBeInTheDocument();
-
-    fireEvent.click(btnPlayPauseEl);
-
-    await waitFor(() => {
-      expect(getByTestId('icon-play')).toBeInTheDocument();
-    });
-
-    fireEvent.click(btnPlayPauseEl);
-
-    await waitFor(() => {
-      expect(getByTestId('icon-pause')).toBeInTheDocument();
-    });
   });
 });
