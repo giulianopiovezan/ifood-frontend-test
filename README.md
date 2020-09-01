@@ -4,13 +4,20 @@
 
 <p align="center">
   Platform used to reconcile two things that combine very well, food and music, listen to the most popular playlists and combine with a snack lol.
-  It is also possible to filter by location and country, in addition to being able to page the results.
+  It is also possible to filter by location, country, playlist name and timestamp, in addition to being able to page the results.
 </p>
 
 <p align="center">
   <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=8257E5&labelColor=000000">
 </p>
 
+## 🚀 Features
+
+The application consist of a sigle page, that have a list of playlists, having options to filter and paginate too.
+
+In the list you can see playlist's cover, name, and a short description. You also have option to open in spotify, or see playlist's music, where there are some details, like album cover, artists, music's name and duration. You can play a preview of a music too in the app.
+
+below you see the header and filters
 
 ## 🚀 Tecnologies
 
@@ -54,7 +61,8 @@ $ npm start
 
 **Observation**
 
-The method that i'm using in the app to authorize with spotify's api is for local test only, when deploy this app into production we must be change to user authenticate using credentials to get an access to app.
+In production mode is recommended to use user authorization flow because of security purposes, where each user has their scopes, which grants permissions according of this. With user authorization, the application get an access token, that has short life time, and enforce user authorize again.
+In test, the app using client credentials flow to simplify user interface.
 
 ## Tests
 
