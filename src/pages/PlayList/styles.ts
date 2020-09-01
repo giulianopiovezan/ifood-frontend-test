@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mainColor } from 'styles/colors';
 
 export const Container = styled.div`
   display: flex;
@@ -8,6 +9,22 @@ export const Container = styled.div`
   background: #f5f3f4;
   padding: 10px;
   border-radius: 5px;
+
+  .playlist-noresults {
+    text-align: center;
+    padding: 32px;
+    font-size: 28px;
+
+    h2 {
+      font-weight: 700;
+    }
+
+    span {
+      font-weight: 700;
+
+      color: ${mainColor};
+    }
+  }
 
   .loadingPlaylist {
     width: 100%;

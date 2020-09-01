@@ -131,6 +131,13 @@ const PlayList: React.FC = () => {
         filters={filterData.filters}
       />
       <Container>
+        {!playlistFiltered.length && (
+          <div className="playlist-noresults">
+            <h2>
+              <span>OPS, </span>Playlists não encontradas :(
+            </h2>
+          </div>
+        )}
         {playlistFiltered.map(playlist => (
           <PlaylistDetails key={playlist.id} playlist={playlist} />
         ))}
